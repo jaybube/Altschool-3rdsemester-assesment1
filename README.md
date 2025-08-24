@@ -2,9 +2,9 @@
 # CloudLaunch Project Assessment
 This project deploys a basic cloud infrastructure on AWS using Terraform. It addresses two main tasks: hosting a secure static website on S3 with an IAM user and designing a private VPC network for future applications. The entire infrastructure is defined as Infrastructure as Code (IaC), allowing for repeatable and automated deployments.
 
-What I Did in Task 1: S3 and IAM
+## What I Did in Task 1: S3 and IAM
 
-S3 Buckets: I created three S3 buckets with distinct access levels:
+* S3 Buckets: I created three S3 buckets with distinct access levels:
 
 Public Website Bucket: A bucket to host a simple index.html file, configured for static website hosting and made publicly accessible via a bucket policy.
 
@@ -12,7 +12,7 @@ Private Documents Bucket: A private bucket for storing internal documents.
 
 Visible-Only Bucket: A private bucket that a specific IAM user can see in their list but cannot access its contents.
 
-IAM User and Policy: I created a new IAM user named cloudlaunch-user. I attached a custom JSON policy to this user, granting them limited permissions:
+* IAM User and Policy: I created a new IAM user named cloudlaunch-user. I attached a custom JSON policy to this user, granting them limited permissions:
 
 s3:ListBucket on all three buckets.
 
@@ -22,11 +22,11 @@ s3:GetObject on the public website bucket only.
 
 No s3:DeleteObject permissions on any bucket.
 
-Access Control: The IAM user's login profile was configured to require a password change on the first login, enhancing security.
+* Access Control: The IAM user's login profile was configured to require a password change on the first login, enhancing security.
 
-What I Did in Task 2: VPC Design
+# What I Did in Task 2: VPC Design
 
-VPC Creation: I designed and created a custom Virtual Private Cloud (VPC) with the CIDR block 10.0.0.0/16 to serve as the isolated network for the project.
+* VPC Creation: I designed and created a custom Virtual Private Cloud (VPC) with the CIDR block 10.0.0.0/16 to serve as the isolated network for the project.
 
 Subnetting: I created three logically separated subnets within the VPC:
 
@@ -36,30 +36,30 @@ A Private Application Subnet (10.0.2.0/24) for app servers.
 
 A Private Database Subnet (10.0.3.0/28) for databases.
 
-Routing: I set up an Internet Gateway and associated it with the Public Subnet via a route table, allowing public traffic to enter. The private subnets were configured with private route tables, ensuring they have no direct access to the internet.
+* Routing: I set up an Internet Gateway and associated it with the Public Subnet via a route table, allowing public traffic to enter. The private subnets were configured with private route tables, ensuring they have no direct access to the internet.
 
-Security Groups: I created two security groups to act as virtual firewalls:
+* Security Groups: I created two security groups to act as virtual firewalls:
 
 cloudlaunch-app-sg to allow HTTP traffic within the VPC.
 
 cloudlaunch-db-sg to allow MySQL traffic only from the application security group, protecting the database.
 
-IAM Permissions: The cloudlaunch-user was given read-only permissions to view all the VPC components (VPC, subnets, route tables, etc.) to allow for monitoring without the ability to modify or delete them.
+* IAM Permissions: The cloudlaunch-user was given read-only permissions to view all the VPC components (VPC, subnets, route tables, etc.) to allow for monitoring without the ability to modify or delete them.
 
 S3 Static Site URL
 
 The live website can be accessed at:
 <br>
 
-[Insert S3 Bucket Website Endpoint Here]
+[yogi-s3-2025-site.s3-website-us-east-1.amazonaws.com]
 <br>
 (This URL is provided in the Terraform output after successful deployment.)
 
 IAM User Policy (Formatted JSON)
 
-The JSON policy document attached to the cloudlaunch-user is as follows:
+# The JSON policy document attached to the cloudlaunch-user is as follows:
 
-JSON
+`JSON
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -102,6 +102,8 @@ JSON
     }
   ]
 }
+] `
+
 User Credentials
 
 Console URL: [Insert IAM Console URL Here]
