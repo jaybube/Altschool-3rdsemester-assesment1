@@ -1,5 +1,5 @@
 # Altschool-3rdsemester-assesment1
-CloudLaunch Project Assessment
+# CloudLaunch Project Assessment
 This project deploys a basic cloud infrastructure on AWS using Terraform. It addresses two main tasks: hosting a secure static website on S3 with an IAM user and designing a private VPC network for future applications. The entire infrastructure is defined as Infrastructure as Code (IaC), allowing for repeatable and automated deployments.
 
 What I Did in Task 1: S3 and IAM
